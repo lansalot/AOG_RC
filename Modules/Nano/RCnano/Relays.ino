@@ -44,6 +44,7 @@ void CheckRelays()
     NewLo |= PowerRelayLo;
     NewHi |= PowerRelayHi;
 
+#if SupportMCP23017 == 1
     if (MDL.UseMCP23017 == 1)
     {
         if (IOexpanderFound)
@@ -82,4 +83,18 @@ void CheckRelays()
             }
         }
     }
+#else
+    // use Nano pins
+    for (int j = 0; j < 2; j++)
+    {
+        if (j < 1) Rlys = NewLo; else Rlys = NewHi;
+        for (int i = 0; i < 8; i++)
+        {
+            if (MDL.Relays[i] > 1) // check if relay is enabled
+            {
+                if (bitRead(Rlys, i)) digitalWrite(MDL.Relays[i + j * 8], MDL.RelayOnSignal); else digitalWrite(MDL.Relays[i + j * 8], !MDL.RelayOnSignal);
+            }
+        }
+    }
+#endif
 }

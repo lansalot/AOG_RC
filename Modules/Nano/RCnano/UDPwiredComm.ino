@@ -1,4 +1,4 @@
-
+#if SupportEthernet == 1
 byte UDPpacket[30];
 uint16_t UDPpgn;
 
@@ -347,3 +347,4 @@ void ReceiveUDPwired(uint16_t dest_port, uint8_t src_ip[IP_LEN], uint16_t src_po
         }
     }
 }
+#endif
