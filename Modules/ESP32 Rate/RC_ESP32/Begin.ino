@@ -1,4 +1,4 @@
-
+#include <esp32-hal-ledc.h>
 // valid pins for each processor
 uint8_t ValidPins0[] = { 0,2,4,13,14,15,16,17,21,22,25,26,27,32,33 };	// SPI pins 5,18,19,23 excluded for ethernet module
 
@@ -171,12 +171,14 @@ void DoSetup()
 
 		// pwm
 		// DRV8870 IN1
-		ledcSetup(i * 2, 500, 8);
-		ledcAttachPin(Sensor[i].IN1, i * 2);
+		ledcSetup(i * 2, 500, 8);             // channel, freq, resolution
+		ledcAttachPin(Sensor[i].IN1, i * 2);  // pin, channel
+	    //ledcAttachChannel(Sensor[i].IN1, 500, 8, i * 2); // (uint8_t pin, uint32_t freq, uint8_t resolution, uint8_t channel);
 		
 		// DRV8870 IN2
 		ledcSetup(i * 2 + 1, 500, 8);
 		ledcAttachPin(Sensor[i].IN2, i * 2 + 1);
+    	//ledcAttachChannel(Sensor[i].IN2, 500, 8, i * 2 + 1); // (uint8_t pin, uint32_t freq, uint8_t resolution, uint8_t channel);
 	}
 
 	// Relays
@@ -553,4 +555,3 @@ bool ValidData()
 	GoodPins = Result;
 	return Result;
 }
-

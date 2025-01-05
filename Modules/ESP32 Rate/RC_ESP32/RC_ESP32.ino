@@ -1,4 +1,7 @@
-
+//
+//#include <ETH.h>
+//#include <dummy.h>
+#include <dummy.h>
 #include "PCA95x5_RC.h"		// modified from https://github.com/hideakitai/PCA95x5
 #include <pcf8574.h>		// https://github.com/RobTillaart/PCF8574
 #include <ESP2SOTA.h>		// https://github.com/pangodream/ESP2SOTA
@@ -14,6 +17,7 @@
 #include <Adafruit_I2CDevice.h>
 #include <Adafruit_I2CRegister.h>
 #include <Adafruit_SPIDevice.h>
+#include <esp32-hal-ledc.h>
 
 #include <WiFi.h>
 #include <WiFiUdp.h>
@@ -64,8 +68,8 @@ struct ModuleConfig
 	char APname[ModStringLengths] = "RateModule";
 	char APpassword[ModStringLengths] = "111222333";
 	uint8_t WifiMode = 1;			// 0 AP mode, 1 Station + AP
-	char SSID[ModStringLengths] = "Tractor";		// name of network ESP32 connects to
-	char Password[ModStringLengths] = "111222333";
+	char SSID[ModStringLengths] = "HomeAP";		// name of network ESP32 connects to
+	char Password[ModStringLengths] = "BigHouse14!!";
 	uint8_t WorkPin;
 	bool WorkPinIsMomentary = false;
 };
